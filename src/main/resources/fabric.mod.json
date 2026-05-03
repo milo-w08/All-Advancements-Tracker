@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "aaigttracker",
+  "version": "${version}",
+  "name": "All Advancements IGT Tracker",
+  "description": "A Fabric tracker UI for All Advancements speedruns with SpeedRunIGT-aware timestamps.",
+  "authors": [
+    "Codex"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "dev.milow.aaigttracker.AllAdvancementsIgtTracker"
+    ],
+    "client": [
+      "dev.milow.aaigttracker.client.AllAdvancementsIgtTrackerClient"
+    ]
+  },
+  "mixins": [
+    "all_advancements_tracker.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "minecraft": ">=26.1 <26.2",
+    "fabric-api": "*",
+    "java": ">=25"
+  },
+  "suggests": {
+    "speedrunigt": "*"
+  }
+}
