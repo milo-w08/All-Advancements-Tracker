@@ -19,6 +19,7 @@ public final class AllAdvancementsIgtTrackerClient implements ClientModInitializ
 
     @Override
     public void onInitializeClient() {
+        TrackerDataRepository.registerReloadListener();
         trackerManager = new AdvancementTrackerManager();
         KeyMapping.Category trackerCategory = KeyMapping.Category.register(
                 Identifier.fromNamespaceAndPath(AllAdvancementsIgtTracker.MOD_ID, "tracker")

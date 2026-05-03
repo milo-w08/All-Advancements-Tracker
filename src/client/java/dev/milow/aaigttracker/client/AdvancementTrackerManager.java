@@ -43,41 +43,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 
 public final class AdvancementTrackerManager {
-    private static final List<Identifier> ROOT_ORDER = List.of(
-            Identifier.parse("minecraft:story/root"),
-            Identifier.parse("minecraft:nether/root"),
-            Identifier.parse("minecraft:end/root"),
-            Identifier.parse("minecraft:adventure/root"),
-            Identifier.parse("minecraft:husbandry/root")
-    );
-    private static final Map<Identifier, Integer> STORY_ADVANCEMENT_ORDER = indexedOrder(List.of(
-            id("minecraft:story/root"),
-            id("minecraft:story/mine_stone"),
-            id("minecraft:story/upgrade_tools"),
-            id("minecraft:story/smelt_iron"),
-            id("minecraft:story/iron_tools"),
-            id("minecraft:story/mine_diamond"),
-            id("minecraft:story/enchant_item"),
-            id("minecraft:story/shiny_gear"),
-            id("minecraft:story/obtain_armor"),
-            id("minecraft:story/deflect_arrow"),
-            id("minecraft:story/lava_bucket"),
-            id("minecraft:story/form_obsidian"),
-            id("minecraft:story/enter_the_nether"),
-            id("minecraft:story/follow_ender_eye"),
-            id("minecraft:story/enter_the_end"),
-            id("minecraft:story/cure_zombie_villager")
-    ));
-    private static final Set<Identifier> HIDDEN_ADVANCEMENTS = Set.of(
-            id("minecraft:story/root"),
-            id("minecraft:adventure/root"),
-            id("minecraft:husbandry/root")
-    );
-    private static final Set<String> TRACKED_ROOTS = Set.of("story", "nether", "end", "adventure", "husbandry");
-    private static final Comparator<AdvancementSnapshot> SNAPSHOT_ORDER = Comparator
-            .comparingInt((AdvancementSnapshot snapshot) -> rootOrder(snapshot.rootId()))
-            .thenComparingInt(AdvancementTrackerManager::snapshotOrder)
-            .thenComparing(snapshot -> snapshot.title().getString(), String.CASE_INSENSITIVE_ORDER);
+    private static final Comparator<AdvancementSnapshot> SNAPSHOT_ORDER = AdvancementOrdering.SNAPSHOT_ORDER;
     private static final Comparator<AdvancementNode> TREE_NODE_ORDER = Comparator
             .comparingDouble(AdvancementTrackerManager::displayX)
             .thenComparingDouble(AdvancementTrackerManager::displayY)
@@ -85,7 +51,6 @@ public final class AdvancementTrackerManager {
     private static final FileToIdConverter ADVANCEMENT_RESOURCES = FileToIdConverter.json("advancement");
     private static final String SMITHING_TRIM_SUFFIX = "_smithing_trim";
     private static final String SMITHING_SUFFIX = "_smithing";
-    private static final Map<String, List<Identifier>> TWO_BY_TWO_BREEDING_ITEMS = createTwoByTwoBreedingItems();
 
     private final SpeedRunIgtBridge speedRunIgtBridge = new SpeedRunIgtBridge();
     private final TimerSource timerSource = new TimerSource(this.speedRunIgtBridge);
@@ -191,8 +156,8 @@ public final class AdvancementTrackerManager {
         Map<Identifier, AdvancementSnapshot> rebuiltSnapshots = new HashMap<>();
 
         List<AdvancementNode> roots = copyNodes(tree.roots());
-        roots.removeIf(node -> !isTrackedRunAdvancement(node.holder().id()));
-        roots.sort(Comparator.comparingInt(node -> rootOrder(node.holder().id())));
+        roots.removeIf(node -> !AdvancementOrdering.isTrackedRunAdvancement(node.holder().id()));
+        roots.sort(Comparator.comparingInt(node -> AdvancementOrdering.rootOrder(node.holder().id())));
 
         List<ResolvedAdvancement> resolvedAdvancements = new ArrayList<>();
         int nextTreeIndex = 0;
@@ -229,13 +194,13 @@ public final class AdvancementTrackerManager {
     ) {
         AdvancementHolder holder = node.holder();
         Identifier id = holder.id();
-        if (!isTrackedRunAdvancement(id)) {
+        if (!AdvancementOrdering.isTrackedRunAdvancement(id)) {
             return nextTreeIndex;
         }
 
         Advancement advancement = holder.value();
         Optional<DisplayInfo> displayInfo = advancement.display();
-        if (displayInfo.isPresent() && !HIDDEN_ADVANCEMENTS.contains(id)) {
+        if (displayInfo.isPresent() && !TrackerDataRepository.current().advancements().hiddenAdvancements().contains(id)) {
             AdvancementProgress progress = this.resolveProgress(serverPlayer, holder, advancement);
             resolvedAdvancements.add(
                     new ResolvedAdvancement(
@@ -286,7 +251,7 @@ public final class AdvancementTrackerManager {
         for (String criterion : orderedCriteria) {
             CriterionVisual visual = visuals.get(criterion);
             if (visual == null) {
-                visual = this.decorateCriterionVisual(id, criterion, this.fallbackCriterionVisual(id, criterion));
+                visual = CriterionVisualResolver.decorate(id, criterion, this.fallbackCriterionVisual(id, criterion));
             }
             Long criterionCompletionTime = this.criterionCompletionTime(worldState, id, criterion, progress, timeEstimator);
             criteriaByKey.put(criterion, new CriterionSnapshot(
@@ -375,7 +340,7 @@ public final class AdvancementTrackerManager {
                 }
 
                 CriterionVisual visual = this.parseCriterionVisual(advancementId, entry.getKey(), entry.getValue().getAsJsonObject());
-                visuals.put(entry.getKey(), this.decorateCriterionVisual(
+                visuals.put(entry.getKey(), CriterionVisualResolver.decorate(
                         advancementId,
                         entry.getKey(),
                         visual
@@ -823,142 +788,6 @@ public final class AdvancementTrackerManager {
         return values;
     }
 
-    private CriterionVisual decorateCriterionVisual(Identifier advancementId, String criterionKey, CriterionVisual visual) {
-        if (visual == null) {
-            return null;
-        }
-
-        List<CriterionIcon> supplementaryIcons = this.supplementaryIconsFor(advancementId, criterionKey);
-        if (supplementaryIcons.isEmpty()) {
-            return visual;
-        }
-
-        return new CriterionVisual(
-                visual.displayName(),
-                visual.icon(),
-                supplementaryIcons,
-                SupplementaryIconMode.CYCLE_ONE
-        );
-    }
-
-    private List<CriterionIcon> supplementaryIconsFor(Identifier advancementId, String criterionKey) {
-        if (advancementId == null || criterionKey == null
-                || !"minecraft:husbandry/bred_all_animals".equals(advancementId.toString())) {
-            return List.of();
-        }
-
-        List<Identifier> itemIds = TWO_BY_TWO_BREEDING_ITEMS.get(stripNamespace(criterionKey));
-        if (itemIds == null || itemIds.isEmpty()) {
-            return List.of();
-        }
-
-        List<CriterionIcon> icons = new ArrayList<>(itemIds.size());
-        for (Identifier itemId : itemIds) {
-            Item item = BuiltInRegistries.ITEM.getOptional(itemId).orElse(null);
-            if (item == null || item == Items.AIR) {
-                continue;
-            }
-
-            icons.add(CriterionIcon.item(item.getDefaultInstance()));
-        }
-        return List.copyOf(icons);
-    }
-
-    private static Map<String, List<Identifier>> createTwoByTwoBreedingItems() {
-        Map<String, List<Identifier>> itemsByCriterion = new HashMap<>();
-        itemsByCriterion.put("armadillo", ids("minecraft:spider_eye"));
-        itemsByCriterion.put("axolotl", ids("minecraft:tropical_fish_bucket"));
-        itemsByCriterion.put("bee", ids(
-                "minecraft:dandelion",
-                "minecraft:open_eyeblossom",
-                "minecraft:poppy",
-                "minecraft:blue_orchid",
-                "minecraft:allium",
-                "minecraft:azure_bluet",
-                "minecraft:red_tulip",
-                "minecraft:orange_tulip",
-                "minecraft:white_tulip",
-                "minecraft:pink_tulip",
-                "minecraft:oxeye_daisy",
-                "minecraft:cornflower",
-                "minecraft:lily_of_the_valley",
-                "minecraft:wither_rose",
-                "minecraft:torchflower",
-                "minecraft:sunflower",
-                "minecraft:lilac",
-                "minecraft:peony",
-                "minecraft:rose_bush",
-                "minecraft:pitcher_plant",
-                "minecraft:flowering_azalea_leaves",
-                "minecraft:flowering_azalea",
-                "minecraft:mangrove_propagule",
-                "minecraft:cherry_leaves",
-                "minecraft:pink_petals",
-                "minecraft:wildflowers",
-                "minecraft:chorus_flower",
-                "minecraft:spore_blossom",
-                "minecraft:cactus_flower"
-        ));
-        itemsByCriterion.put("camel", ids("minecraft:cactus"));
-        itemsByCriterion.put("cat", ids("minecraft:cod", "minecraft:salmon"));
-        itemsByCriterion.put("chicken", ids(
-                "minecraft:wheat_seeds",
-                "minecraft:melon_seeds",
-                "minecraft:pumpkin_seeds",
-                "minecraft:beetroot_seeds",
-                "minecraft:torchflower_seeds",
-                "minecraft:pitcher_pod"
-        ));
-        itemsByCriterion.put("cow", ids("minecraft:wheat"));
-        itemsByCriterion.put("donkey", ids("minecraft:golden_carrot", "minecraft:golden_apple", "minecraft:enchanted_golden_apple"));
-        itemsByCriterion.put("fox", ids("minecraft:sweet_berries", "minecraft:glow_berries"));
-        itemsByCriterion.put("frog", ids("minecraft:slime_ball"));
-        itemsByCriterion.put("goat", ids("minecraft:wheat"));
-        itemsByCriterion.put("hoglin", ids("minecraft:crimson_fungus"));
-        itemsByCriterion.put("horse", ids("minecraft:golden_carrot", "minecraft:golden_apple", "minecraft:enchanted_golden_apple"));
-        itemsByCriterion.put("llama", ids("minecraft:hay_block"));
-        itemsByCriterion.put("mooshroom", ids("minecraft:wheat"));
-        itemsByCriterion.put("mule", ids("minecraft:golden_carrot", "minecraft:golden_apple", "minecraft:enchanted_golden_apple"));
-        itemsByCriterion.put("nautilus", ids("minecraft:pufferfish", "minecraft:pufferfish_bucket"));
-        itemsByCriterion.put("ocelot", ids("minecraft:cod", "minecraft:salmon"));
-        itemsByCriterion.put("panda", ids("minecraft:bamboo"));
-        itemsByCriterion.put("pig", ids("minecraft:carrot", "minecraft:potato", "minecraft:beetroot"));
-        itemsByCriterion.put("rabbit", ids("minecraft:carrot", "minecraft:golden_carrot", "minecraft:dandelion"));
-        itemsByCriterion.put("sheep", ids("minecraft:wheat"));
-        itemsByCriterion.put("sniffer", ids("minecraft:torchflower_seeds"));
-        itemsByCriterion.put("strider", ids("minecraft:warped_fungus"));
-        itemsByCriterion.put("turtle", ids("minecraft:seagrass"));
-        itemsByCriterion.put("wolf", ids(
-                "minecraft:beef",
-                "minecraft:chicken",
-                "minecraft:cooked_beef",
-                "minecraft:cooked_chicken",
-                "minecraft:cooked_mutton",
-                "minecraft:cooked_porkchop",
-                "minecraft:cooked_rabbit",
-                "minecraft:mutton",
-                "minecraft:porkchop",
-                "minecraft:rabbit",
-                "minecraft:rotten_flesh",
-                "minecraft:cod",
-                "minecraft:cooked_cod",
-                "minecraft:salmon",
-                "minecraft:cooked_salmon",
-                "minecraft:tropical_fish",
-                "minecraft:pufferfish",
-                "minecraft:rabbit_stew"
-        ));
-        return Map.copyOf(itemsByCriterion);
-    }
-
-    private static List<Identifier> ids(String... values) {
-        List<Identifier> ids = new ArrayList<>(values.length);
-        for (String value : values) {
-            ids.add(id(value));
-        }
-        return List.copyOf(ids);
-    }
-
     private static String stripNamespace(String rawKey) {
         if (rawKey == null) {
             return null;
@@ -1001,7 +830,7 @@ public final class AdvancementTrackerManager {
             seen.putIfAbsent(criterion, Boolean.TRUE);
         }
 
-        return orderCriteria(advancementId, new ArrayList<>(seen.keySet()));
+        return AdvancementOrdering.orderCriteria(advancementId, new ArrayList<>(seen.keySet()));
     }
 
     private AdvancementProgress resolveProgress(
@@ -1079,34 +908,6 @@ public final class AdvancementTrackerManager {
         return fallbackLevelMillis != null
                 ? rawReading.withDisplay(true, fallbackLevelMillis, "screen.aaigttracker.timer.fallback")
                 : TimerReading.unavailable();
-    }
-
-    private static boolean isTrackedRunAdvancement(Identifier id) {
-        if (!"minecraft".equals(id.getNamespace())) {
-            return false;
-        }
-
-        String path = id.getPath();
-        int slash = path.indexOf('/');
-        if (slash <= 0) {
-            return false;
-        }
-
-        return TRACKED_ROOTS.contains(path.substring(0, slash));
-    }
-
-    private static int rootOrder(Identifier rootId) {
-        int index = ROOT_ORDER.indexOf(rootId);
-        return index >= 0 ? index : ROOT_ORDER.size();
-    }
-
-    private static int snapshotOrder(AdvancementSnapshot snapshot) {
-        Integer storyOrder = STORY_ADVANCEMENT_ORDER.get(snapshot.id());
-        if (storyOrder != null) {
-            return storyOrder;
-        }
-
-        return 10_000 + snapshot.treeIndex();
     }
 
     private static List<AdvancementNode> copyNodes(Iterable<AdvancementNode> nodes) {
@@ -1257,125 +1058,6 @@ public final class AdvancementTrackerManager {
         };
     }
 
-    private static List<String> orderCriteria(Identifier advancementId, List<String> criteria) {
-        Map<String, Integer> originalIndexes = new HashMap<>();
-        for (int index = 0; index < criteria.size(); index++) {
-            originalIndexes.put(criteria.get(index), index);
-        }
-
-        criteria.sort(Comparator
-                .comparingInt((String criterion) -> criterionOrder(advancementId, criterion))
-                .thenComparingInt(criterion -> originalIndexes.getOrDefault(criterion, Integer.MAX_VALUE)));
-        return List.copyOf(criteria);
-    }
-
-    private static int criterionOrder(Identifier advancementId, String criterion) {
-        if (advancementId == null) {
-            return Integer.MAX_VALUE;
-        }
-
-        return switch (advancementId.toString()) {
-            case "minecraft:adventure/adventuring_time" -> adventuringTimeCriterionOrder(criterion);
-            case "minecraft:nether/explore_nether" -> hotTouristCriterionOrder(criterion);
-            case "minecraft:husbandry/plant_seed" -> aSeedyPlaceCriterionOrder(criterion);
-            default -> Integer.MAX_VALUE;
-        };
-    }
-
-    private static int adventuringTimeCriterionOrder(String criterion) {
-        return indexOf(List.of(
-                "minecraft:mushroom_fields",
-                "minecraft:deep_frozen_ocean",
-                "minecraft:frozen_ocean",
-                "minecraft:deep_cold_ocean",
-                "minecraft:cold_ocean",
-                "minecraft:deep_ocean",
-                "minecraft:ocean",
-                "minecraft:deep_lukewarm_ocean",
-                "minecraft:lukewarm_ocean",
-                "minecraft:warm_ocean",
-                "minecraft:river",
-                "minecraft:frozen_river",
-                "minecraft:beach",
-                "minecraft:snowy_beach",
-                "minecraft:stony_shore",
-                "minecraft:swamp",
-                "minecraft:mangrove_swamp",
-                "minecraft:snowy_slopes",
-                "minecraft:snowy_plains",
-                "minecraft:snowy_taiga",
-                "minecraft:ice_spikes",
-                "minecraft:grove",
-                "minecraft:windswept_gravelly_hills",
-                "minecraft:windswept_hills",
-                "minecraft:windswept_forest",
-                "minecraft:windswept_savanna",
-                "minecraft:jagged_peaks",
-                "minecraft:stony_peaks",
-                "minecraft:frozen_peaks",
-                "minecraft:plains",
-                "minecraft:meadow",
-                "minecraft:sunflower_plains",
-                "minecraft:forest",
-                "minecraft:flower_forest",
-                "minecraft:birch_forest",
-                "minecraft:old_growth_birch_forest",
-                "minecraft:dark_forest",
-                "minecraft:pale_garden",
-                "minecraft:taiga",
-                "minecraft:old_growth_spruce_taiga",
-                "minecraft:old_growth_pine_taiga",
-                "minecraft:savanna",
-                "minecraft:savanna_plateau",
-                "minecraft:jungle",
-                "minecraft:sparse_jungle",
-                "minecraft:bamboo_jungle",
-                "minecraft:badlands",
-                "minecraft:wooded_badlands",
-                "minecraft:eroded_badlands",
-                "minecraft:desert",
-                "minecraft:cherry_grove",
-                "minecraft:dripstone_caves",
-                "minecraft:lush_caves",
-                "minecraft:deep_dark"
-        ), criterion);
-    }
-
-    private static int hotTouristCriterionOrder(String criterion) {
-        return indexOf(List.of(
-                "minecraft:nether_wastes",
-                "minecraft:soul_sand_valley",
-                "minecraft:crimson_forest",
-                "minecraft:warped_forest",
-                "minecraft:basalt_deltas"
-        ), criterion);
-    }
-
-    private static int aSeedyPlaceCriterionOrder(String criterion) {
-        return indexOf(List.of(
-                "wheat",
-                "pumpkin_stem",
-                "melon_stem",
-                "beetroots",
-                "nether_wart",
-                "torchflower",
-                "pitcher_pod"
-        ), criterion);
-    }
-
-    private static int indexOf(List<String> order, String criterion) {
-        int index = order.indexOf(criterion);
-        return index >= 0 ? index : Integer.MAX_VALUE;
-    }
-
-    private static Map<Identifier, Integer> indexedOrder(List<Identifier> ids) {
-        Map<Identifier, Integer> order = new HashMap<>(ids.size());
-        for (int index = 0; index < ids.size(); index++) {
-            order.put(ids.get(index), index);
-        }
-        return Map.copyOf(order);
-    }
-
     private static Identifier id(String value) {
         return Identifier.parse(value);
     }
@@ -1492,14 +1174,6 @@ public final class AdvancementTrackerManager {
     }
 
     private record TimeSample(Instant instant, long igtMillis) {
-    }
-
-    private record CriterionVisual(
-            Component displayName,
-            CriterionIcon icon,
-            List<CriterionIcon> supplementaryIcons,
-            SupplementaryIconMode supplementaryIconMode
-    ) {
     }
 
     private static final class WorldTrackerState {

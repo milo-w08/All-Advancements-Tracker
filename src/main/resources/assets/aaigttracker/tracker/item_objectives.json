@@ -1,0 +1,110 @@
+{
+  "gates": {
+    "aaigttracker:conduit": [
+      { "advancement": "minecraft:nether/all_effects" }
+    ],
+    "aaigttracker:beacon": [
+      { "advancement": "minecraft:nether/create_full_beacon" }
+    ],
+    "aaigttracker:netherite": [
+      { "advancement": "minecraft:nether/netherite_armor" }
+    ],
+    "aaigttracker:enchanted_golden_apple": [
+      { "advancement": "minecraft:husbandry/balanced_diet" }
+    ],
+    "aaigttracker:trident": [
+      { "advancement": "minecraft:adventure/very_very_frightening" }
+    ],
+    "aaigttracker:piercing_crossbow": [
+      { "advancement": "minecraft:adventure/two_birds_one_arrow" },
+      { "advancement": "minecraft:adventure/arbalistic" }
+    ],
+    "aaigttracker:potions": [
+      { "advancement": "minecraft:nether/all_effects" }
+    ],
+    "aaigttracker:ominous_bottles": [
+      { "advancement": "minecraft:nether/all_effects" }
+    ],
+    "aaigttracker:sniffer_eggs": [
+      { "advancement": "minecraft:husbandry/bred_all_animals", "criterion": "sniffer" }
+    ],
+    "aaigttracker:smithing_with_style": [
+      { "advancement": "minecraft:adventure/trim_with_all_exclusive_armor_patterns" }
+    ],
+    "aaigttracker:end_crystals": [
+      { "advancement": "minecraft:end/respawn_dragon" }
+    ]
+  },
+  "trim_templates": [
+    { "pattern": "rib", "item": "minecraft:rib_armor_trim_smithing_template" },
+    { "pattern": "silence", "item": "minecraft:silence_armor_trim_smithing_template" },
+    { "pattern": "snout", "item": "minecraft:snout_armor_trim_smithing_template" },
+    { "pattern": "spire", "item": "minecraft:spire_armor_trim_smithing_template" },
+    { "pattern": "tide", "item": "minecraft:tide_armor_trim_smithing_template" },
+    { "pattern": "vex", "item": "minecraft:vex_armor_trim_smithing_template" },
+    { "pattern": "ward", "item": "minecraft:ward_armor_trim_smithing_template" },
+    { "pattern": "wayfinder", "item": "minecraft:wayfinder_armor_trim_smithing_template" }
+  ],
+  "potions": [
+    {
+      "key": "swiftness",
+      "potion": "minecraft:swiftness",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:sugar" ]
+    },
+    {
+      "key": "slowness",
+      "potion": "minecraft:slowness",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:sugar", "minecraft:fermented_spider_eye" ]
+    },
+    {
+      "key": "night_vision",
+      "potion": "minecraft:night_vision",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:golden_carrot" ]
+    },
+    {
+      "key": "invisibility",
+      "potion": "minecraft:invisibility",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:golden_carrot", "minecraft:fermented_spider_eye" ]
+    },
+    {
+      "key": "weakness",
+      "potion": "minecraft:weakness",
+      "ingredients": [ "minecraft:fermented_spider_eye" ]
+    },
+    {
+      "key": "strength",
+      "potion": "minecraft:strength",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:blaze_powder" ]
+    },
+    {
+      "key": "slow_falling",
+      "potion": "minecraft:slow_falling",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:phantom_membrane" ]
+    },
+    {
+      "key": "water_breathing",
+      "potion": "minecraft:water_breathing",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:pufferfish" ]
+    },
+    {
+      "key": "oozing",
+      "potion": "minecraft:oozing",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:slime_block" ]
+    },
+    {
+      "key": "wind_charged",
+      "potion": "minecraft:wind_charged",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:breeze_rod" ]
+    },
+    {
+      "key": "weaving",
+      "potion": "minecraft:weaving",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:cobweb" ]
+    },
+    {
+      "key": "infested",
+      "potion": "minecraft:infested",
+      "ingredients": [ "minecraft:nether_wart", "minecraft:stone" ]
+    }
+  ]
+}
