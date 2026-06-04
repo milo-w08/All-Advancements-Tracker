@@ -1,0 +1,592 @@
+{
+  "formatVersion": 3,
+  "minecraftVersion": "26.1.2",
+  "radius": 32,
+  "captures": [
+    {
+      "biomeId": "minecraft:badlands",
+      "fileName": "minecraft_badlands.sbic",
+      "radius": 32,
+      "paletteCount": 10,
+      "blockCount": 21478,
+      "entityCount": 19,
+      "capturedAt": 1778250798363
+    },
+    {
+      "biomeId": "minecraft:bamboo_jungle",
+      "fileName": "minecraft_bamboo_jungle.sbic",
+      "radius": 32,
+      "paletteCount": 44,
+      "blockCount": 33477,
+      "entityCount": 18,
+      "capturedAt": 1778250812345
+    },
+    {
+      "biomeId": "minecraft:basalt_deltas",
+      "fileName": "minecraft_basalt_deltas.sbic",
+      "radius": 32,
+      "paletteCount": 4,
+      "blockCount": 33524,
+      "entityCount": 18,
+      "capturedAt": 1778250825303
+    },
+    {
+      "biomeId": "minecraft:beach",
+      "fileName": "minecraft_beach.sbic",
+      "radius": 32,
+      "paletteCount": 13,
+      "blockCount": 23464,
+      "entityCount": 19,
+      "capturedAt": 1778250838314
+    },
+    {
+      "biomeId": "minecraft:birch_forest",
+      "fileName": "minecraft_birch_forest.sbic",
+      "radius": 32,
+      "paletteCount": 38,
+      "blockCount": 26190,
+      "entityCount": 16,
+      "capturedAt": 1778250313654
+    },
+    {
+      "biomeId": "minecraft:cherry_grove",
+      "fileName": "minecraft_cherry_grove.sbic",
+      "radius": 32,
+      "paletteCount": 43,
+      "blockCount": 24914,
+      "entityCount": 21,
+      "capturedAt": 1778250328599
+    },
+    {
+      "biomeId": "minecraft:cold_ocean",
+      "fileName": "minecraft_cold_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 23,
+      "blockCount": 27616,
+      "entityCount": 4,
+      "capturedAt": 1778250344787
+    },
+    {
+      "biomeId": "minecraft:crimson_forest",
+      "fileName": "minecraft_crimson_forest.sbic",
+      "radius": 32,
+      "paletteCount": 4,
+      "blockCount": 20162,
+      "entityCount": 16,
+      "capturedAt": 1778250357559
+    },
+    {
+      "biomeId": "minecraft:dark_forest",
+      "fileName": "minecraft_dark_forest.sbic",
+      "radius": 32,
+      "paletteCount": 67,
+      "blockCount": 30740,
+      "entityCount": 33,
+      "capturedAt": 1778250371306
+    },
+    {
+      "biomeId": "minecraft:deep_cold_ocean",
+      "fileName": "minecraft_deep_cold_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 21,
+      "blockCount": 30424,
+      "entityCount": 23,
+      "capturedAt": 1778250386822
+    },
+    {
+      "biomeId": "minecraft:deep_dark",
+      "fileName": "minecraft_deep_dark.sbic",
+      "radius": 32,
+      "paletteCount": 6,
+      "blockCount": 32889,
+      "entityCount": 0,
+      "capturedAt": 1778250399971
+    },
+    {
+      "biomeId": "minecraft:deep_frozen_ocean",
+      "fileName": "minecraft_deep_frozen_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 17,
+      "blockCount": 32390,
+      "entityCount": 33,
+      "capturedAt": 1778250414113
+    },
+    {
+      "biomeId": "minecraft:deep_lukewarm_ocean",
+      "fileName": "minecraft_deep_lukewarm_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 21,
+      "blockCount": 30426,
+      "entityCount": 30,
+      "capturedAt": 1778250429258
+    },
+    {
+      "biomeId": "minecraft:deep_ocean",
+      "fileName": "minecraft_deep_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 21,
+      "blockCount": 30430,
+      "entityCount": 33,
+      "capturedAt": 1778250444582
+    },
+    {
+      "biomeId": "minecraft:desert",
+      "fileName": "minecraft_desert.sbic",
+      "radius": 32,
+      "paletteCount": 17,
+      "blockCount": 21379,
+      "entityCount": 21,
+      "capturedAt": 1778250457311
+    },
+    {
+      "biomeId": "minecraft:dripstone_caves",
+      "fileName": "minecraft_dripstone_caves.sbic",
+      "radius": 32,
+      "paletteCount": 7,
+      "blockCount": 34273,
+      "entityCount": 16,
+      "capturedAt": 1778250470580
+    },
+    {
+      "biomeId": "minecraft:end_barrens",
+      "fileName": "minecraft_end_barrens.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 19403,
+      "entityCount": 16,
+      "capturedAt": 1778250483838
+    },
+    {
+      "biomeId": "minecraft:end_highlands",
+      "fileName": "minecraft_end_highlands.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 19403,
+      "entityCount": 16,
+      "capturedAt": 1778250497165
+    },
+    {
+      "biomeId": "minecraft:end_midlands",
+      "fileName": "minecraft_end_midlands.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 19403,
+      "entityCount": 19,
+      "capturedAt": 1778250511225
+    },
+    {
+      "biomeId": "minecraft:eroded_badlands",
+      "fileName": "minecraft_eroded_badlands.sbic",
+      "radius": 32,
+      "paletteCount": 11,
+      "blockCount": 23035,
+      "entityCount": 23,
+      "capturedAt": 1778251470728
+    },
+    {
+      "biomeId": "minecraft:flower_forest",
+      "fileName": "minecraft_flower_forest.sbic",
+      "radius": 32,
+      "paletteCount": 34,
+      "blockCount": 25513,
+      "entityCount": 16,
+      "capturedAt": 1778250539257
+    },
+    {
+      "biomeId": "minecraft:forest",
+      "fileName": "minecraft_forest.sbic",
+      "radius": 32,
+      "paletteCount": 48,
+      "blockCount": 27324,
+      "entityCount": 26,
+      "capturedAt": 1778250553233
+    },
+    {
+      "biomeId": "minecraft:frozen_ocean",
+      "fileName": "minecraft_frozen_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 16,
+      "blockCount": 30898,
+      "entityCount": 22,
+      "capturedAt": 1778250567514
+    },
+    {
+      "biomeId": "minecraft:frozen_peaks",
+      "fileName": "minecraft_frozen_peaks.sbic",
+      "radius": 32,
+      "paletteCount": 17,
+      "blockCount": 28709,
+      "entityCount": 16,
+      "capturedAt": 1778250581761
+    },
+    {
+      "biomeId": "minecraft:frozen_river",
+      "fileName": "minecraft_frozen_river.sbic",
+      "radius": 32,
+      "paletteCount": 24,
+      "blockCount": 26625,
+      "entityCount": 9,
+      "capturedAt": 1778250596222
+    },
+    {
+      "biomeId": "minecraft:grove",
+      "fileName": "minecraft_grove.sbic",
+      "radius": 32,
+      "paletteCount": 22,
+      "blockCount": 27709,
+      "entityCount": 23,
+      "capturedAt": 1778250610429
+    },
+    {
+      "biomeId": "minecraft:ice_spikes",
+      "fileName": "minecraft_ice_spikes.sbic",
+      "radius": 32,
+      "paletteCount": 14,
+      "blockCount": 23740,
+      "entityCount": 20,
+      "capturedAt": 1778250623176
+    },
+    {
+      "biomeId": "minecraft:jagged_peaks",
+      "fileName": "minecraft_jagged_peaks.sbic",
+      "radius": 32,
+      "paletteCount": 15,
+      "blockCount": 28137,
+      "entityCount": 0,
+      "capturedAt": 1778250636417
+    },
+    {
+      "biomeId": "minecraft:jungle",
+      "fileName": "minecraft_jungle.sbic",
+      "radius": 32,
+      "paletteCount": 53,
+      "blockCount": 36425,
+      "entityCount": 18,
+      "capturedAt": 1778250851329
+    },
+    {
+      "biomeId": "minecraft:lukewarm_ocean",
+      "fileName": "minecraft_lukewarm_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 21,
+      "blockCount": 27620,
+      "entityCount": 19,
+      "capturedAt": 1778250865153
+    },
+    {
+      "biomeId": "minecraft:lush_caves",
+      "fileName": "minecraft_lush_caves.sbic",
+      "radius": 32,
+      "paletteCount": 10,
+      "blockCount": 34558,
+      "entityCount": 20,
+      "capturedAt": 1778250877391
+    },
+    {
+      "biomeId": "minecraft:mangrove_swamp",
+      "fileName": "minecraft_mangrove_swamp.sbic",
+      "radius": 32,
+      "paletteCount": 35,
+      "blockCount": 42592,
+      "entityCount": 17,
+      "capturedAt": 1778250890436
+    },
+    {
+      "biomeId": "minecraft:meadow",
+      "fileName": "minecraft_meadow.sbic",
+      "radius": 32,
+      "paletteCount": 31,
+      "blockCount": 22530,
+      "entityCount": 17,
+      "capturedAt": 1778250903253
+    },
+    {
+      "biomeId": "minecraft:mushroom_fields",
+      "fileName": "minecraft_mushroom_fields.sbic",
+      "radius": 32,
+      "paletteCount": 42,
+      "blockCount": 21995,
+      "entityCount": 23,
+      "capturedAt": 1778250915833
+    },
+    {
+      "biomeId": "minecraft:nether_wastes",
+      "fileName": "minecraft_nether_wastes.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 30955,
+      "entityCount": 16,
+      "capturedAt": 1778250928187
+    },
+    {
+      "biomeId": "minecraft:ocean",
+      "fileName": "minecraft_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 22,
+      "blockCount": 27612,
+      "entityCount": 10,
+      "capturedAt": 1778250942335
+    },
+    {
+      "biomeId": "minecraft:old_growth_birch_forest",
+      "fileName": "minecraft_old_growth_birch_forest.sbic",
+      "radius": 32,
+      "paletteCount": 35,
+      "blockCount": 25860,
+      "entityCount": 19,
+      "capturedAt": 1778250955070
+    },
+    {
+      "biomeId": "minecraft:old_growth_pine_taiga",
+      "fileName": "minecraft_old_growth_pine_taiga.sbic",
+      "radius": 32,
+      "paletteCount": 36,
+      "blockCount": 29955,
+      "entityCount": 18,
+      "capturedAt": 1778250967928
+    },
+    {
+      "biomeId": "minecraft:old_growth_spruce_taiga",
+      "fileName": "minecraft_old_growth_spruce_taiga.sbic",
+      "radius": 32,
+      "paletteCount": 30,
+      "blockCount": 32109,
+      "entityCount": 23,
+      "capturedAt": 1778250980544
+    },
+    {
+      "biomeId": "minecraft:pale_garden",
+      "fileName": "minecraft_pale_garden.sbic",
+      "radius": 32,
+      "paletteCount": 45,
+      "blockCount": 30524,
+      "entityCount": 16,
+      "capturedAt": 1778250993244
+    },
+    {
+      "biomeId": "minecraft:plains",
+      "fileName": "minecraft_plains.sbic",
+      "radius": 32,
+      "paletteCount": 24,
+      "blockCount": 22535,
+      "entityCount": 17,
+      "capturedAt": 1778251006028
+    },
+    {
+      "biomeId": "minecraft:river",
+      "fileName": "minecraft_river.sbic",
+      "radius": 32,
+      "paletteCount": 21,
+      "blockCount": 24995,
+      "entityCount": 22,
+      "capturedAt": 1778251019109
+    },
+    {
+      "biomeId": "minecraft:savanna",
+      "fileName": "minecraft_savanna.sbic",
+      "radius": 32,
+      "paletteCount": 25,
+      "blockCount": 23404,
+      "entityCount": 25,
+      "capturedAt": 1778251031843
+    },
+    {
+      "biomeId": "minecraft:savanna_plateau",
+      "fileName": "minecraft_savanna_plateau.sbic",
+      "radius": 32,
+      "paletteCount": 22,
+      "blockCount": 26097,
+      "entityCount": 22,
+      "capturedAt": 1778251044394
+    },
+    {
+      "biomeId": "minecraft:small_end_islands",
+      "fileName": "minecraft_small_end_islands.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 19403,
+      "entityCount": 15,
+      "capturedAt": 1778251056623
+    },
+    {
+      "biomeId": "minecraft:snowy_beach",
+      "fileName": "minecraft_snowy_beach.sbic",
+      "radius": 32,
+      "paletteCount": 16,
+      "blockCount": 24125,
+      "entityCount": 0,
+      "capturedAt": 1778251069631
+    },
+    {
+      "biomeId": "minecraft:snowy_plains",
+      "fileName": "minecraft_snowy_plains.sbic",
+      "radius": 32,
+      "paletteCount": 15,
+      "blockCount": 21692,
+      "entityCount": 3,
+      "capturedAt": 1778251082572
+    },
+    {
+      "biomeId": "minecraft:snowy_slopes",
+      "fileName": "minecraft_snowy_slopes.sbic",
+      "radius": 32,
+      "paletteCount": 15,
+      "blockCount": 27025,
+      "entityCount": 3,
+      "capturedAt": 1778251095916
+    },
+    {
+      "biomeId": "minecraft:snowy_taiga",
+      "fileName": "minecraft_snowy_taiga.sbic",
+      "radius": 32,
+      "paletteCount": 28,
+      "blockCount": 27799,
+      "entityCount": 18,
+      "capturedAt": 1778251108745
+    },
+    {
+      "biomeId": "minecraft:soul_sand_valley",
+      "fileName": "minecraft_soul_sand_valley.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 19634,
+      "entityCount": 17,
+      "capturedAt": 1778251121545
+    },
+    {
+      "biomeId": "minecraft:sparse_jungle",
+      "fileName": "minecraft_sparse_jungle.sbic",
+      "radius": 32,
+      "paletteCount": 33,
+      "blockCount": 24074,
+      "entityCount": 30,
+      "capturedAt": 1778251134692
+    },
+    {
+      "biomeId": "minecraft:stony_peaks",
+      "fileName": "minecraft_stony_peaks.sbic",
+      "radius": 32,
+      "paletteCount": 16,
+      "blockCount": 28599,
+      "entityCount": 22,
+      "capturedAt": 1778251147630
+    },
+    {
+      "biomeId": "minecraft:stony_shore",
+      "fileName": "minecraft_stony_shore.sbic",
+      "radius": 32,
+      "paletteCount": 23,
+      "blockCount": 22047,
+      "entityCount": 19,
+      "capturedAt": 1778251160138
+    },
+    {
+      "biomeId": "minecraft:sunflower_plains",
+      "fileName": "minecraft_sunflower_plains.sbic",
+      "radius": 32,
+      "paletteCount": 18,
+      "blockCount": 22191,
+      "entityCount": 36,
+      "capturedAt": 1778251172984
+    },
+    {
+      "biomeId": "minecraft:swamp",
+      "fileName": "minecraft_swamp.sbic",
+      "radius": 32,
+      "paletteCount": 26,
+      "blockCount": 25362,
+      "entityCount": 23,
+      "capturedAt": 1778251186088
+    },
+    {
+      "biomeId": "minecraft:taiga",
+      "fileName": "minecraft_taiga.sbic",
+      "radius": 32,
+      "paletteCount": 26,
+      "blockCount": 25636,
+      "entityCount": 29,
+      "capturedAt": 1778251199155
+    },
+    {
+      "biomeId": "minecraft:the_end",
+      "fileName": "minecraft_the_end.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 19403,
+      "entityCount": 16,
+      "capturedAt": 1778251211980
+    },
+    {
+      "biomeId": "minecraft:the_void",
+      "fileName": "minecraft_the_void.sbic",
+      "radius": 32,
+      "paletteCount": 3,
+      "blockCount": 21260,
+      "entityCount": 0,
+      "capturedAt": 1778251225598
+    },
+    {
+      "biomeId": "minecraft:warm_ocean",
+      "fileName": "minecraft_warm_ocean.sbic",
+      "radius": 32,
+      "paletteCount": 51,
+      "blockCount": 27783,
+      "entityCount": 19,
+      "capturedAt": 1778251240615
+    },
+    {
+      "biomeId": "minecraft:warped_forest",
+      "fileName": "minecraft_warped_forest.sbic",
+      "radius": 32,
+      "paletteCount": 5,
+      "blockCount": 20229,
+      "entityCount": 17,
+      "capturedAt": 1778251255452
+    },
+    {
+      "biomeId": "minecraft:windswept_forest",
+      "fileName": "minecraft_windswept_forest.sbic",
+      "radius": 32,
+      "paletteCount": 28,
+      "blockCount": 25643,
+      "entityCount": 16,
+      "capturedAt": 1778251275034
+    },
+    {
+      "biomeId": "minecraft:windswept_gravelly_hills",
+      "fileName": "minecraft_windswept_gravelly_hills.sbic",
+      "radius": 32,
+      "paletteCount": 16,
+      "blockCount": 25715,
+      "entityCount": 19,
+      "capturedAt": 1778251296673
+    },
+    {
+      "biomeId": "minecraft:windswept_hills",
+      "fileName": "minecraft_windswept_hills.sbic",
+      "radius": 32,
+      "paletteCount": 19,
+      "blockCount": 25111,
+      "entityCount": 27,
+      "capturedAt": 1778251340784
+    },
+    {
+      "biomeId": "minecraft:windswept_savanna",
+      "fileName": "minecraft_windswept_savanna.sbic",
+      "radius": 32,
+      "paletteCount": 13,
+      "blockCount": 25182,
+      "entityCount": 17,
+      "capturedAt": 1778251407081
+    },
+    {
+      "biomeId": "minecraft:wooded_badlands",
+      "fileName": "minecraft_wooded_badlands.sbic",
+      "radius": 32,
+      "paletteCount": 11,
+      "blockCount": 21479,
+      "entityCount": 17,
+      "capturedAt": 1778251421012
+    }
+  ]
+}

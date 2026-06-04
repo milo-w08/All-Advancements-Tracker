@@ -1,7 +1,7 @@
 package dev.milow.aaigttracker.mixin;
 
-import dev.milow.aaigttracker.client.AdvancementTrackerScreen;
-import dev.milow.aaigttracker.client.AllAdvancementsIgtTrackerClient;
+import dev.milow.aaigttracker.client.app.AllAdvancementsIgtTrackerClient;
+import dev.milow.aaigttracker.client.screen.AdvancementTrackerScreen;
 import java.util.Map;
 import java.util.TreeMap;
 import net.minecraft.client.Minecraft;
